@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@mysql/employees'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@mysql:3306/mydatabase'
 db = SQLAlchemy(app)
 
 # employees = [
@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 #         "EmailAddress": "june.doe@peoplesuite.com", "Country": "AU"}
 # ]
 
-class Employee(db.Model):
+class Employees(db.Model):
     EmployeeID = db.Column(db.Integer, primary_key=True)
     FirstName = db.Column(db.String(255), nullable=False)
     LastName = db.Column(db.String(255), nullable=False)
@@ -36,13 +36,13 @@ class Employee(db.Model):
 @app.route('/employees', methods=['GET', 'POST'])
 def manage_employees():
     if request.method == 'GET':
-        employees = Employee.query.all()
+        employees = Employees.query.all()
         returnEmployees = [x.to_dict() for x in employees]
         return jsonify(returnEmployees), 200
     elif request.method == 'POST':
 
         employeeData = request.json
-        newEmployee = Employee(
+        newEmployee = Employees(
             FirstName=employeeData['FirstName'],
             LastName=employeeData['LastName'],
             EmailAddress=employeeData['EmailAddress'],
