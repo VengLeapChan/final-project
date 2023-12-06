@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
        - name: flask-service
-         image: vengleapchan/final-project:latest
+         image: vengleapchan/final-project:latest1
          imagePullPolicy: Always
          env:
           - name: POSTGRES_PASSWORD
