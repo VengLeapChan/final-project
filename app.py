@@ -4,18 +4,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@mysql/employees'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@mysql/employees'
 db = SQLAlchemy(app)
 
-employees = [
-    {"EmployeeID": 1, "FirstName": "John", "LastName": "Doe",
-        "EmailAddress": "john.doe@peoplesuite.com", "Country": "US"},
-    {"EmployeeID": 2, "FirstName": "Jane", "LastName": "Doe",
-        "EmailAddress": "jane.doe@peoplesuite.com", "Country": "GB"},
-    {"EmployeeID": 3, "FirstName": "June", "LastName": "Doe",
-        "EmailAddress": "june.doe@peoplesuite.com", "Country": "AU"}
-]
+# employees = [
+#     {"EmployeeID": 1, "FirstName": "John", "LastName": "Doe",
+#         "EmailAddress": "john.doe@peoplesuite.com", "Country": "US"},
+#     {"EmployeeID": 2, "FirstName": "Jane", "LastName": "Doe",
+#         "EmailAddress": "jane.doe@peoplesuite.com", "Country": "GB"},
+#     {"EmployeeID": 3, "FirstName": "June", "LastName": "Doe",
+#         "EmailAddress": "june.doe@peoplesuite.com", "Country": "AU"}
+# ]
 
 class Employee(db.Model):
     EmployeeID = db.Column(db.Integer, primary_key=True)
